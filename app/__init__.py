@@ -1,16 +1,17 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
+import os
 
 db = SQLAlchemy()
 
 def create_app():
     app = Flask(__name__)
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///tasks.db'
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///tasks.db')
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
     # Initialize CORS with specific origins
-    CORS(app, resources={r"/api/*": {"origins": "http://localhost:3000"}})
+    CORS(app, resources={r"/api/*": {"origins": ["http://localhost:3000", "https://task-management-application-by-basu.vercel.app/"]}})
 
     db.init_app(app)
 
