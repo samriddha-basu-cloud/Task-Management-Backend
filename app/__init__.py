@@ -11,7 +11,9 @@ def create_app():
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
     # Initialize CORS with specific origins
-    CORS(app, resources={r"/api/*": {"origins": ["http://localhost:3000", "https://task-management-application-by-basu.vercel.app/"]}})
+    # CORS(app, resources={r"/api/*": {"origins": ["http://localhost:3000", "https://task-management-application-by-basu.vercel.app/"]}})
+    CORS(app)
+
 
     db.init_app(app)
 
